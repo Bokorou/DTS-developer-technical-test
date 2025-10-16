@@ -1,8 +1,12 @@
 import { Plus, Eye, Pencil, Trash2, X, LogOut } from "lucide-react";
 import { useEffect, useState } from "react";
-import { userService } from "./services/Api";
 import type { CreateTaskDTO, Task } from "./Index";
 import { useNavigate } from "react-router";
+import {
+  getUserTasks,
+  handleCreateTask,
+  handleDeleteTask,
+} from "./Handlers/TaskHandlers";
 
 function TaskPage() {
   const navigate = useNavigate();
@@ -10,10 +14,13 @@ function TaskPage() {
   const handleLogout = () => {
     navigate("/");
   };
+
+  const userId = Number(localStorage.getItem("userId"));
+
   const [isCreating, setIsCreating] = useState(false);
   const [isViewing, setIsViewing] = useState(false);
   const [tasks, setTasks] = useState<Task[]>([]);
-  const reloadTasks = () => getUserTasks();
+  const reloadTasks = () => getUserTasks(userId, setTasks);
   const [newTask, setNewTask] = useState<CreateTaskDTO>({
     title: "",
     description: "",
@@ -23,39 +30,14 @@ function TaskPage() {
   });
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
 
-  const userId = Number(localStorage.getItem("userId"));
-
-  const getUserTasks = async () => {
-    try {
-      if (!userId) return;
-      const response = await userService.getTasks(userId);
-      setTasks(response.data as Task[]);
-    } catch (err) {
-      console.error(err);
-    }
+  const deleteTask = () => {
+    if (!userId || !selectedTask?.id) return;
+    handleDeleteTask(userId, selectedTask?.id, reloadTasks);
   };
 
   useEffect(() => {
-    getUserTasks();
+    reloadTasks();
   }, []);
-
-  const handleCreateTask = async () => {
-    try {
-      if (!userId) return;
-      const response = await userService.createTasks(userId, newTask);
-      setIsCreating(false);
-      reloadTasks();
-      setNewTask({
-        title: "",
-        description: "",
-        status: "PENDING",
-        dueDate: "",
-        dueTime: "",
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   const handleViewTask = (task: Task) => {
     setSelectedTask(task);
@@ -120,9 +102,6 @@ function TaskPage() {
                   >
                     <Eye size={20} />
                   </button>
-                  <button className="bg-gray-200 px-2 py-1 hover:bg-gray-100">
-                    <Pencil size={20} />
-                  </button>
                 </div>
               </div>
             ))}
@@ -174,7 +153,15 @@ function TaskPage() {
               }
             />
             <button
-              onClick={handleCreateTask}
+              onClick={() =>
+                handleCreateTask(
+                  userId,
+                  newTask,
+                  reloadTasks,
+                  setNewTask,
+                  setIsCreating
+                )
+              }
               className="flex w-40 h-10 ml-4 mt-4 gap-3 items-center shadow-xl/20 hover:bg-gray-100 border-1 rounded-md  
             font-semibold"
               type="button"
@@ -193,10 +180,10 @@ function TaskPage() {
           >
             <X />
           </button>
-          <div className="ml-2">
-            <h1 className="text-2xl font-bold mb-4">{selectedTask?.title}</h1>
+          <div className="flex items-center gap 8 ml-2">
 
             <div className="flex flex-col gap-4">
+            <h1 className="text-2xl font-bold mb-4">{selectedTask?.title}</h1>
               <p>
                 <strong>Description:</strong>{" "}
                 {selectedTask?.description || "No Description"}
@@ -211,10 +198,15 @@ function TaskPage() {
                 <strong>Status:</strong> {selectedTask?.status}
               </p>
             </div>
+          <div>
+            <button className="bg-gray-200 px-2 py-1 hover:bg-gray-100">
+              <Pencil size={20} />
+            </button>
+          </div>
           </div>
           <button
             className="absolute bottom-1 right-2 px-1 py-1 rounded-md bg-red-600 text-white font-bold"
-            onClick={() => setIsViewing(false)}
+            onClick={deleteTask}
           >
             <Trash2 />
           </button>
