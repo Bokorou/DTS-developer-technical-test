@@ -17,9 +17,9 @@ services:
     build: ./task_manager_backend
     container_name: taskmanager_service
     depends_on:
-      - databse
+      - database
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://user_db:5432/taskmanagerDB
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/taskmanagerDB
       SPRING_DATASOURCE_USERNAME: admin
       SPRING_DATASOURCE_PASSWORD: password1
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
