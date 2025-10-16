@@ -1,6 +1,7 @@
 package com.DTS.task_manager.Mapper;
 
 import com.DTS.task_manager.DTO.CreateUserDto;
+import com.DTS.task_manager.DTO.UserResponseDTO;
 import com.DTS.task_manager.Entity.Task;
 import com.DTS.task_manager.Entity.User;
 
@@ -15,6 +16,15 @@ public class UserMapper {
         newUser.setTasks(emptyTaskList);
 
         return newUser;
+    }
+
+    public static UserResponseDTO toDTO(User user){
+        UserResponseDTO responseDTO = new UserResponseDTO();
+
+        responseDTO.setId((int)(long)user.getId());
+        responseDTO.setUsername(user.getUsername());
+
+        return responseDTO;
     }
 
 }
