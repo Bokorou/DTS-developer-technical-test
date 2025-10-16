@@ -57,23 +57,24 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-80">
+    <div className="flex flex-col gap-8 items-center justify-center min-h-screen ">
+      <h1 className=" text-3xl font-semibold">Welcome to Task Manager!</h1> 
+      <div className="bg-[#E6D8C3] p-8 rounded-lg shadow-lg w-80">
         <div className="mb-6 text-center">
-          <h1 className="text-2xl font-semibold text-gray-700">
+          <h1 className="text-2xl font-semibold text-[#123458]">
             {isCreating ? "Sign Up" : "Sign In"}
           </h1>
         </div>
         <form className="flex flex-col space-y-4">
           <input
-            className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className=" bg-[#FAF8F1] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
             type="text"
             placeholder="Username"
             value={username}
           onChange={(e) => setUsername(e.target.value)}
           />
           <input
-            className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className=" bg-[#FAF8F1] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
             type="password"
             placeholder="Password"
             value={password}
@@ -81,7 +82,7 @@ const Login = () => {
           />
           {isCreating && (
             <input
-            className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className=" bg-[#FAF8F1] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
               type="password"
               placeholder="Re-type Password"
               
@@ -90,13 +91,13 @@ const Login = () => {
           <button
             type="button"
             onClick={() => (isCreating ? handleCreateUser() : handleLogin())}
-            className="bg-white text-black rounded py-2 hover:bg-gray-100 shadow-lg transition"
+            className="bg-white text-black font-semibold rounded py-2 hover:bg-gray-100 shadow-lg transition"
           >
             {isCreating ? "Sign Up" : "Sign In"}
           </button>
         </form>
         {!isCreating ? (
-          <p className="text-sm text-gray-600 text-center mt-2">
+          <p className="text-sm text-[#123458] text-center mt-2">
             Don’t have an account yet?{" "}
             <span
               onClick={onClickFunction}

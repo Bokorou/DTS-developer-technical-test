@@ -32,11 +32,23 @@ export const getUserTasks = async (userId: number, setTasks: (tasks : Task[]) =>
       }
     };
 
+    export const handlUpdateTask = async(userId: number, taskId: number,
+        updatedTask: CreateTaskDTO,
+        reloadTasks: () => void) =>{
+        try{
+            if(!userId || !taskId) return;
+            const response = await userService.updateTask(userId, taskId, updatedTask);
+            reloadTasks();
+        } catch (err){
+            console.error(err);
+        }
+    }
+
     export const handleDeleteTask = async( userId: number, taskId: number,
         reloadTasks: () => void
     ) => {
         try {
-            if(!userId) return;
+            if(!userId || !taskId) return;
             const reponse = await userService.deleteTask(userId, taskId);
             reloadTasks();
         } catch (err){

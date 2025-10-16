@@ -1,0 +1,50 @@
+services:
+  database:
+    image: postgres:latest
+    container_name: taskmanager_db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password1
+      POSTGRES_DB: taskmanagerDB
+    ports:
+      - "5433:5432"
+    volumes:
+      - user_data:/var/lib/postgresql/data
+    networks:
+      - taskmanager
+
+  backend:
+    build: ./task_manager_backend
+    container_name: taskmanager_service
+    depends_on:
+      - databse
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://user_db:5432/taskmanagerDB
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: password1
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_SQL_INIT_MODE: always
+      SPRING_JPA_SHOW_SQL: "true"
+    ports:
+      - "4000:4000"
+    networks:
+      - taskmanager
+
+  frontend:
+    build: ./task_manager_frontend
+    container_name: taskmanager_frontend
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./task_manager_frontend:/app
+      - /app/node_modules
+    networks:
+      - taskmanager
+
+volumes:
+  user_data:
+
+networks:
+  taskmanager:

@@ -12,6 +12,6 @@ export const userService = {
     createUser: (data: {username:string; password: string}) => api.post('/create', data),
     getTasks: (userId: number) => api.get(`/${userId}/tasks`),
     createTasks: (userId: number,  newTask: CreateTaskDTO ) => api.post(`/${userId}/tasks`, newTask),
-    updateTask: (userId: number, taskId: number) => api.put(`/${userId}/tasks/${taskId}`),
+    updateTask: (userId: number, taskId: number, updatedTask: CreateTaskDTO) => api.put(`/${userId}/tasks/${taskId}`, updatedTask),
     deleteTask: (userId: number, taskId: number) => api.delete(`/${userId}/tasks/${taskId}`)
 };
