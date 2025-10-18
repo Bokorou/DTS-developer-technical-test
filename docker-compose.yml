@@ -26,7 +26,7 @@ services:
       SPRING_SQL_INIT_MODE: always
       SPRING_JPA_SHOW_SQL: "true"
     ports:
-      - "4000:4000"
+      - "4000:8080"
     networks:
       - taskmanager
 
