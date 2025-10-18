@@ -84,8 +84,8 @@ function TaskPage() {
         </button>
       </div>
 
-      <div className="h-dvh justify-items-center">
-        <div className="fixed bg-[#E6D8C3]  mt-10 w-1/3 py-8 shadow-xl/20 min-h-3/4 justify-items-center">
+      <div className="h-dvh flex justify-center pt-20">
+        <div className=" bg-[#E6D8C3] w-1/3 py-8 shadow-xl/20 min-h-3/4 justify-items-center">
           <h1 className="text-2xl font-semibold mt-4 text-[#123458]">Tasks</h1>
           <div className="mt-6  flex flex-col gap-4 max-h-[70vh] w-full overflow-y-auto ">
             {tasks.map((task) => (
@@ -138,7 +138,9 @@ function TaskPage() {
           >
             <X color="#E62727" />
           </button>
-          <h1 className="text-2xl font-semibold mb-4 text-[#123458]">Add Tasks</h1>
+          <h1 className="text-2xl font-semibold mb-4 text-[#123458]">
+            Add Tasks
+          </h1>
           <form className="flex flex-col gap-4 w-3/4">
             <input
               className=" rounded bg-[#FAF8F1] px-3 py-2"
@@ -183,8 +185,7 @@ function TaskPage() {
                   setIsCreating
                 )
               }
-              
-                className="ml-10 bg-[#5D866C] text-white font-bold rounded py-2 w-3/4 rounded-md hover:bg-[#5D866C]/90 shadow-lg transition"
+              className="ml-10 bg-[#5D866C] text-white font-bold rounded py-2 w-3/4 rounded-md hover:bg-[#5D866C]/90 shadow-lg transition"
               type="button"
             >
               Create
@@ -208,29 +209,39 @@ function TaskPage() {
                 className="text-2xl  font-bold mb-1"
                 type="text"
                 value={updatedTask?.title}
-                onChange={(e) => setUpdatedTask({...updatedTask, title: e.target.value})}
+                onChange={(e) =>
+                  setUpdatedTask({ ...updatedTask, title: e.target.value })
+                }
                 disabled={isDisabled}
               />
               <textarea
                 className="bg-[#FAF8F1] rounded px-3 py-2 w-full"
                 disabled={isDisabled}
                 value={updatedTask?.description || ""}
-                onChange={(e) => setUpdatedTask({...updatedTask, description: e.target.value})}
-
+                onChange={(e) =>
+                  setUpdatedTask({
+                    ...updatedTask,
+                    description: e.target.value,
+                  })
+                }
               />
               <input
                 className="bg-[#FAF8F1] rounded px-3 py-2 w-full"
                 type="date"
                 disabled={isDisabled}
                 value={updatedTask?.dueDate || ""}
-                onChange={(e) => setUpdatedTask({...updatedTask, dueDate: e.target.value})}
+                onChange={(e) =>
+                  setUpdatedTask({ ...updatedTask, dueDate: e.target.value })
+                }
               />
               <input
                 className="bg-[#FAF8F1] rounded px-3 py-2 w-full"
                 type="time"
                 disabled={isDisabled}
                 value={updatedTask?.dueTime || ""}
-                onChange={(e) => setUpdatedTask({...updatedTask, dueTime: e.target.value})}
+                onChange={(e) =>
+                  setUpdatedTask({ ...updatedTask, dueTime: e.target.value })
+                }
               />
               <p>
                 Status:{" "}
