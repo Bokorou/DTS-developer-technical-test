@@ -32,7 +32,9 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 @Tag(name = "User API", description = "API for managing users and their tasks")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173",
+        "http://frontend:5173"})
+
 public class UserController {
 
     @Autowired

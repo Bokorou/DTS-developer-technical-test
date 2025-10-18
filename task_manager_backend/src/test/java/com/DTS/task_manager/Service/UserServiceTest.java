@@ -64,13 +64,13 @@ public class UserServiceTest {
 
     @Test
     void shouldThrowInvalidCredentialsIfPasswordDoesNotMatch() {
-        // Arrange
+
         User testUser = new User(1L, "tester123", "password", Collections.emptyList());
         when(userRepo.findByUsername("tester123")).thenReturn(Optional.of(testUser));
 
         LoginDto loginDto = new LoginDto("tester123", "wrongpassword");
 
-        // Act & Assert
+
         assertThrows(InvalidCredentialsException.class, () -> userService.login(loginDto));
     }
 
