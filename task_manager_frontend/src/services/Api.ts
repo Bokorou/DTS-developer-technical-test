@@ -1,7 +1,7 @@
 import axios from 'axios'
 import type { CreateTaskDTO } from '../Index';
 
-const USER_BASE_URL = "http://localhost:8080/api";
+const USER_BASE_URL = "http://backend:8080/api";
 export const api = axios.create({
     baseURL: USER_BASE_URL,
     headers:{'Content-Type' : 'application/json'}
