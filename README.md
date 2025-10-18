@@ -101,7 +101,7 @@ After logging in, you can add, edit, and delete tasks on the main page.
 ### API documentation (OpenAPI/Swagger) is available at:
 
 ```bash
-http://localhost:8080/swagger-ui.html
+http://localhost:4000/swagger-ui/index.html
 ```
 
 Running Tests
