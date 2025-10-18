@@ -68,7 +68,7 @@ function TaskPage() {
       <div className="fixed top-4 left-4">
         <button
           onClick={() => setIsCreating(true)}
-          className="flex w-40 h-10 border-[#FAEAB1] border-4 gap-3 items-center shadow-md/20 hover:bg-gray-100 border rounded-md font-semibold px-3"
+          className="flex w-48 h-10 border-[#FAEAB1] border-4 gap-3 items-center shadow-md/20 hover:bg-gray-100 border rounded-md font-semibold px-3"
         >
           <Plus />
           Create Task
@@ -84,8 +84,8 @@ function TaskPage() {
         </button>
       </div>
 
-      <div className="h-dvh flex justify-center pt-20">
-        <div className=" bg-[#E6D8C3] w-1/3 py-8 shadow-xl/20 min-h-3/4 justify-items-center">
+      <div className="h-dvh flex justify-center pt-20 pb-10">
+        <div className=" bg-[#E6D8C3] w-1/3 py-8 shadow-md rounded-md min-h-3/4 text-center">
           <h1 className="text-2xl font-semibold mt-4 text-[#123458]">Tasks</h1>
           <div className="mt-6  flex flex-col gap-4 max-h-[70vh] w-full overflow-y-auto ">
             {tasks.map((task) => (
