@@ -71,7 +71,7 @@ spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.defer-datasource-initialization=true
-server.port=8080
+server.port=4000
 ```
 
 Sync the Maven project and run the backend. The server will start on port 8080.
